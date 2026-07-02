@@ -1,10 +1,10 @@
 # GenAI Document Intelligence — RAG-Based Q&A System
 
-A Retrieval-Augmented Generation (RAG) pipeline that lets you upload documents (PDF or text) and ask natural-language questions about them, with grounded, source-cited answers — exposed as a REST API built with FastAPI.
+A Retrieval-Augmented Generation (RAG) pipeline that lets you upload documents (PDF or text) and ask natural-language questions about them, with grounded, source-cited answers - exposed as a REST API built with FastAPI.
 
 ## Why this project exists
 
-Large Language Models don't know anything about your private documents, and they confidently make things up when asked about content they've never seen ("hallucination"). RAG solves this by retrieving the actual relevant text from your documents first, then asking the LLM to answer using *only* that retrieved context. This project implements that full pipeline from scratch — chunking, embeddings, vector search, prompt construction, and generation — rather than relying on a single black-box library call.
+Large Language Models don't know anything about your private documents, and they confidently make things up when asked about content they've never seen ("hallucination"). RAG solves this by retrieving the actual relevant text from your documents first, then asking the LLM to answer using *only* that retrieved context. This project implements that full pipeline from scratch — chunking, embeddings, vector search, prompt construction, and generation rather than relying on a single black-box library call.
 
 ## Architecture
 
@@ -17,8 +17,8 @@ Large Language Models don't know anything about your private documents, and they
                                                                           │
                                                                           ▼
 ┌─────────────┐     ┌──────────────┐     ┌────────────────┐     ┌─────────────┐
-│   Answer    │ <-- │     LLM      │ <-- │ Prompt Builder  │ <-- │  Retrieval  │
-│ + Sources   │     │ (flan-t5)    │     │  (grounding)    │     │ (top-k sim) │
+│   Answer    │ <-- │     LLM      │ <-- │ Prompt Builder │ <-- │  Retrieval  │
+│ + Sources   │     │(Qwen)        │     │  (grounding)   │     │ (top-k sim) │
 └─────────────┘     └──────────────┘     └────────────────┘     └─────────────┘
 ```
 
@@ -36,7 +36,7 @@ Large Language Models don't know anything about your private documents, and they
 | API framework | FastAPI | Async support, automatic validation via Pydantic, auto-generated OpenAPI docs |
 | Embeddings | sentence-transformers (`all-MiniLM-L6-v2`) | Free, runs on CPU, strong performance for semantic search |
 | Vector search | FAISS | Industry-standard, optimized C++ similarity search, scales to millions of vectors |
-| LLM | HuggingFace `flan-t5-base` | Free, open-source, no API key required — fully reproducible by anyone who clones this repo |
+| LLM | HuggingFace `Qwen2.5-0.5B-Instruct` | Free, open-source, no API key required — fully reproducible by anyone who clones this repo |
 | PDF parsing | pypdf | Lightweight, pure-Python PDF text extraction |
 | Testing | pytest | Unit tests for chunking, vector store, and prompt-building logic |
 
